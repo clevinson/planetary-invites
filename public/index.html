@@ -8,6 +8,7 @@
   </head>
   <style>
 
+
   body {
     margin: 0px;
   }
@@ -27,10 +28,10 @@
   }
 
   .welcome-text {
-
     font-size: 14pt;
     font-family: courier;
   }
+
   #inviteCode {
     word-break: break-all;
     font-size: 0.7em;
@@ -38,6 +39,18 @@
   }
   #inviteCode span {
     background: #ddd;
+  }
+
+  @media only screen and (max-width: 600px) {
+    .container {
+      flex-direction: column-reverse;
+      height: auto;
+    }
+
+    .planetary {
+      max-width: 100vw;
+      max-height: 80vh;
+    }
   }
 
   </style>
