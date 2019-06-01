@@ -7,18 +7,68 @@
     <meta name="description" content="Secure Scuttlebutt Pub Server"/>
   </head>
   <style>
-  
+
+  body {
+    margin: 0px;
+  }
+
+  .container {
+    height: 100vh;
+    padding: 0 20px 0 20px;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .planetary {
+    max-width: 50vw;
+    max-height: 80vh;
+  }
+
+  .welcome-text {
+
+    font-size: 14pt;
+    font-family: courier;
+  }
+  #inviteCode {
+
+    height: 3em;
+  }
+
   </style>
   <body>
-  
-    hi there!
-    
-    <button onClick="action()"></button>
-  
-  
+
+    <div class="container">
+    <img class="planetary" src="img/planetary.png"/>
+
+    <div class="welcome-text">
+    <p class="intro">
+    Welcome to <a href="https://pub.planetary.computer">pub.planetary.computer</a>.
+    <br/>
+    <br/>
+    pub.planetary.computer is a pub server for <a href="https://scuttlebutt.nz">Secure Scuttlebutt</a>, an off-line first, peer-to-peer social network.
+    <br/>
+    <br/>
+    If you already have a scuttlebutt client installed and are looking to join this pub, you can generate an invite code by clicking <a href="#" onClick="generateInvite()">here</a>.
+    </p>
+    <p id="inviteCode">
+    </p>
+    </div>
+    </div>
+
+
     <script>
-      function action() {
-        alert("thanks for testing ;)");
+
+      function reqListener() {
+        document.getElementById("inviteCode").innerHTML = this.responseText['inviteCode'];
+      }
+      function generateInvite() {
+        var xhr = new XMLHttpRequest();
+
+        xhr.addEventListener("load", reqListener);
+        xhr.open("GET", "/invite");
+        xhr.send();
       }
     </script>
   </body>
