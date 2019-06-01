@@ -15,13 +15,9 @@ ssbClient(function(err, client) {
 app.use(express.static('public'))
 app.get('/invite', function (req, response) {
 
-  let uses = req.query.uses | 1
+  let uses = req.query.uses || 1
 
-  inviteConfig = {
-    'uses': uses
-  }
-
-  sbot.invite.create(inviteConfig, function(err, inviteCode) {
+  sbot.invite.create({'uses': uses}, function(err, inviteCode) {
     if (err) {
       console.log(err)
       response.send(err)
