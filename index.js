@@ -1,29 +1,31 @@
-var ssbClient = require('ssb-client')
-var express = require('express')
-const port = 3000
+const ssbClient = require('ssb-client')
+const express = require('express')
+const port = 8080
 
+let app = express()
+let sbot
 
-var app = express()
+app.set('views', './views')
 
-var sbot
 
 ssbClient(function(err, client) {
   sbot = client
 })
 
+app.use(express.static('public'))
+app.get('/invite', function (req, response) {
 
-app.get('/', function (req, response) {
+  let uses = req.query.uses | 1
 
   inviteConfig = {
-    'uses': 1,
-    'external': 'pub.planetary.computer'
+    'uses': uses
   }
 
-  sbot.invite.create(inviteConfig, function(err, invite) {
+  sbot.invite.create(inviteConfig, function(err, inviteCode) {
     if (err) {
       response.send(err)
     } else {
-      response.send(invite)
+      response.send({'inviteCode': inviteCode, 'uses': uses})
     }
   })
 })
