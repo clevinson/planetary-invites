@@ -23,8 +23,10 @@ app.get('/invite', function (req, response) {
 
   sbot.invite.create(inviteConfig, function(err, inviteCode) {
     if (err) {
+      console.log(err)
       response.send(err)
     } else {
+      console.log(`[${new Date().toISOString()}]: Generated ${uses} invites`)
       response.send({'inviteCode': inviteCode, 'uses': uses})
     }
   })

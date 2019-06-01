@@ -32,8 +32,12 @@
     font-family: courier;
   }
   #inviteCode {
-
+    word-break: break-all;
+    font-size: 0.7em;
     height: 3em;
+  }
+  #inviteCode span {
+    background: #ddd;
   }
 
   </style>
@@ -61,7 +65,10 @@
     <script>
 
       function reqListener() {
-        document.getElementById("inviteCode").innerHTML = this.responseText['inviteCode'];
+	var response = JSON.parse(this.responseText);
+        console.log(response);
+
+        document.getElementById("inviteCode").innerHTML = "<span>" + response['inviteCode'] + "</span>";
       }
       function generateInvite() {
         var xhr = new XMLHttpRequest();
