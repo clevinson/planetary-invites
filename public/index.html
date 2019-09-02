@@ -83,10 +83,16 @@
 
       function reqListener() {
 	var response = JSON.parse(this.responseText);
-        console.log(response);
 
-        document.getElementById("inviteCode").innerHTML = "<span>" + response['inviteCode'] + "</span>";
+        if (response['inviteCode']) {
+	  var codeText = response['inviteCode'];
+        } else {
+          var codeText = "Failed to generate invite. Try again?";
+        }
+
+        document.getElementById("inviteCode").innerHTML = "<span>" + codeText + "</span>";
       }
+
       function generateInvite() {
         var xhr = new XMLHttpRequest();
 
