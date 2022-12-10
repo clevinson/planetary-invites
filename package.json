@@ -4,7 +4,7 @@
   "description": "invite generator for pub.planetary.computer",
   "main": "index.js",
   "dependencies": {
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "ssb-client": "^4.7.6",
     "ssb-invite": "^2.1.3"
   },
